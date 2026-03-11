@@ -1,7 +1,7 @@
 ﻿namespace LABOOP4.Entities
 {
     enum TransportType { Air, Land, Water};
-    internal class Transport
+    internal abstract class Transport
     {
         public string Name { get; }
         public TransportType Type { get; }

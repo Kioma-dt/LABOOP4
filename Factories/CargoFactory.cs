@@ -2,25 +2,6 @@
 using System.Collections.Generic;
 namespace LABOOP4.Factories
 {
-    internal class CargoProvider
-    {
-        Dictionary<string, ICargoFactory> _catalog;
-
-        public CargoProvider(Dictionary<string, ICargoFactory> catalog)
-        {
-            _catalog = catalog;
-        }
-        public Cargo GetCargo(string name)
-        {
-            if (!_catalog.ContainsKey(name))
-            {
-                throw new ArgumentException("No Such Cargo!");
-            }
-
-            return _catalog[name].CreateCargo();
-        }
-    }
-
     internal interface ICargoFactory
     {
         public Cargo CreateCargo();
@@ -30,30 +11,61 @@ namespace LABOOP4.Factories
     {
         public Cargo CreateCargo()
         {
-            return new Cargo("Electronic", 1.5, 50);
+            return new Electronic();
         }
     }
     internal class ClothFactory : ICargoFactory
     {
         public Cargo CreateCargo()
         {
-            return new Cargo("Cloth", 0.8, 20);
+            return new Cloth();
         }
     }
     internal class EquipmentFactory : ICargoFactory
     {
         public Cargo CreateCargo()
         {
-            return new Cargo("Equipment", 120, 15);
+            return new Equipment();
         }
     }
     internal class ProductFactory : ICargoFactory
     {
         public Cargo CreateCargo()
         {
-            return new Cargo("Product", 10, 100);
+            return new Product();
         }
 
+    }
+
+    internal class Electronic : Cargo
+    {
+        public Electronic()
+            : base("Электроника", 1.5, 50)
+        {
+        }
+    }
+
+    internal class Cloth : Cargo
+    {
+        public Cloth()
+            : base("Одежда", 0.8, 20)
+        {
+        }
+    }
+
+    internal class Equipment : Cargo
+    {
+        public Equipment()
+            : base("Оборудование", 120, 15)
+        {
+        }
+    }
+    internal class Product : Cargo
+    {
+        public Product()
+            : base("Скоропортящиеся продукты", 10, 100)
+        {
+        }
     }
 
 }

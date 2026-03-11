@@ -1,10 +1,12 @@
-﻿namespace LABOOP4.Entities
+﻿using System.Collections.Generic;
+
+namespace LABOOP4.Entities
 {
     internal class Order
     {
-        List<CargoBatch> _cargoBatches;
-        public Transport _transport;
-        public int _distance;
+        readonly List<CargoBatch> _cargoBatches;
+        readonly Transport _transport;
+        readonly int _distance;
 
         public Order(List<CargoBatch> cargoBatches, Transport transport, int distance)
         {
@@ -20,9 +22,9 @@
 
             return batchesCost + deliveryCost;
         }
-        public int GetDekiveryTime()
+        public int GetDeliveryTime()
         {
-            return _transport.Speed * _distance;
+            return _distance / _transport.Speed;
         }
     }
 

@@ -1,6 +1,6 @@
 ﻿namespace LABOOP4.Entities
 {
-    internal class Cargo
+    internal abstract class Cargo
     {
         public string Name { get;}
         public double Mass { get;}
