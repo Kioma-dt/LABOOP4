@@ -19,7 +19,7 @@ namespace LABOOP4.Use_Cases
         public Order RegisterOrder(IEnumerable<(string cargoName, int amount)> cargoBatches, 
             string transportName, int distance)
         {
-            var batches = new List<CargoBatch>();
+            var batches = new List<(Cargo, int)>();
             foreach (var (cargoName, amount) in cargoBatches)
             {
                 if (!_cargoCatalog.ContainsKey(cargoName))
@@ -27,7 +27,7 @@ namespace LABOOP4.Use_Cases
                     throw new Exception($"No Such Cargo: {cargoName} in Catalog!");
                 }
 
-                batches.Add(new CargoBatch (_cargoCatalog[cargoName].CreateCargo(), amount));
+                batches.Add((_cargoCatalog[cargoName].CreateCargo(), amount));
             }
 
             if (!_transportCatalog.ContainsKey(transportName))

@@ -8,9 +8,14 @@ namespace LABOOP4.Entities
         readonly Transport _transport;
         readonly int _distance;
 
-        public Order(List<CargoBatch> cargoBatches, Transport transport, int distance)
+        public Order(List<(Cargo, int)> cargoBatches, Transport transport, int distance)
         {
-            _cargoBatches = cargoBatches;
+            _cargoBatches = new List<CargoBatch>();
+            foreach (var (cargo, amount) in cargoBatches)
+            {
+                _cargoBatches.Add(new CargoBatch(cargo, amount));
+            }
+
             _transport = transport;
             _distance = distance;
         }
@@ -27,6 +32,4 @@ namespace LABOOP4.Entities
             return _distance / _transport.Speed;
         }
     }
-
-
 }
