@@ -6,14 +6,13 @@ namespace LABOOP4.Use_Cases
 
     internal class LogisticSystem
     {
-        Dictionary<string, ITransportFactory> _transportCatalog;
-        Dictionary<string, ICargoFactory> _cargoCatalog;
-
-        public LogisticSystem(Dictionary<string, ITransportFactory> transportCatalog, 
-            Dictionary<string, ICargoFactory> cargoCatalog) 
+        readonly ITransportFactory _transportFactory;
+        readonly ICargoFactory _cargoFactory;
+        readonly List<Order> _orders = new List<Order>();
+        public LogisticSystem(ITransportFactory transportFactory, ICargoFactory cargoFactory) 
         {
-            _transportCatalog = transportCatalog;
-            _cargoCatalog = cargoCatalog;
+            _transportFactory = transportFactory;
+            _cargoFactory = cargoFactory;
         }
 
         public Order RegisterOrder(IEnumerable<(string cargoName, int amount)> cargoBatches, 
@@ -22,22 +21,13 @@ namespace LABOOP4.Use_Cases
             var batches = new List<(Cargo, int)>();
             foreach (var (cargoName, amount) in cargoBatches)
             {
-                if (!_cargoCatalog.ContainsKey(cargoName))
-                {
-                    throw new Exception($"No Such Cargo: {cargoName} in Catalog!");
-                }
-
-                batches.Add((_cargoCatalog[cargoName].CreateCargo(), amount));
+                batches.Add((_cargoFactory.CreateCargo(cargoName),amount));
             }
 
-            if (!_transportCatalog.ContainsKey(transportName))
-            {
-                throw new Exception($"No Such Cargo: {transportName} in Catalog!");
-            }
-
-            var transport = _transportCatalog[transportName].CreateTransport();
-
-            return new Order(batches, transport, distance);
+            var transport = _transportFactory.CreateTransport(transportName);
+            var order = new Order(batches, transport, distance);
+            _orders.Add(order);
+            return order;
         }
     }
 }

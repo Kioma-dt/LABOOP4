@@ -1,6 +1,6 @@
 ﻿namespace LABOOP4.Entities
 {
-    internal abstract class Cargo
+    internal class Cargo
     {
         string _name;
         double _mass;
@@ -35,16 +35,57 @@
             }
         }
 
-        public Cargo(string name, double mass, int costPerKg)
+        public Cargo(string name, double mass, double costPerKg)
         {
             Name = name;
             Mass = mass;
             CostPerKg = costPerKg;
         }
+        public Cargo(string name, CargoInfo info)
+            :this(name, info.Mass, info.CostPerKg)
+        {
+
+        }
 
         public double GetCostOfOne()
         {
             return CostPerKg * Mass;
+        }
+    }
+    internal struct CargoInfo
+    {
+        double _mass;
+        double _costPerKg;
+        public double Mass
+        {
+            get => _mass;
+            private set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentException("Mass Should Be Positive!");
+                }
+                _mass = value;
+            }
+        }
+        public double CostPerKg
+        {
+            get => _costPerKg;
+            private set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentException("Cost Should Be Positive!");
+                }
+
+                _costPerKg = value;
+            }
+        }
+
+        public CargoInfo(double mass, int costPerKg)
+        {
+            Mass = mass;
+            CostPerKg = costPerKg;
         }
     }
 
