@@ -27,7 +27,7 @@ namespace LABOOP4.Entities
 
             return batchesCost + deliveryCost;
         }
-        public int GetDeliveryTime()
+        public double GetDeliveryTime()
         {
             return _distance / _transport.Speed;
         }

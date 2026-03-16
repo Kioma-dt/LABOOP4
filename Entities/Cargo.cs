@@ -102,6 +102,7 @@
                 {
                     throw new ArgumentException("Amount Should Be Positive!");
                 }
+                _amount = value;
             }
         }
 

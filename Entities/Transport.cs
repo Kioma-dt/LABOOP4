@@ -1,7 +1,7 @@
 ﻿namespace LABOOP4.Entities
 {
     enum TransportType { Air, Land, Water};
-    internal class Transport
+    internal abstract class Transport
     {
         double _costPerKm;
         double _speed;
@@ -39,12 +39,57 @@
             CostPerKm = costPerKm;
             Speed = speed;
         }
-        public Transport (string name, TransportInfo info)
-            :this(name, info.Type, info.CostPerKm, info.Speed)
+        public Transport(string name, TransportInfo info)
+            : this(name, info.Type, info.CostPerKm, info.Speed)
         {
 
         }
     }
+
+    internal class AirTransport : Transport
+    {
+        public AirTransport(string name, double costPerKm, double speed) 
+            :base(name, TransportType.Air, costPerKm, speed)
+        { }
+        public AirTransport(string name, TransportInfo info)
+            :base(name, info)
+        {
+            if (info.Type != TransportType.Air)
+            {
+                throw new ArgumentException("Types Don't Match");
+            }
+        }
+    }
+
+    internal class LandTransport : Transport
+    {
+        public LandTransport(string name, double costPerKm, double speed)
+            : base(name, TransportType.Land, costPerKm, speed)
+        { }
+        public LandTransport(string name, TransportInfo info)
+            : base(name, info)
+        {
+            if (info.Type != TransportType.Land)
+            {
+                throw new ArgumentException("Types Don't Match");
+            }
+        }
+    }
+    internal class WaterTransport : Transport
+    {
+        public WaterTransport(string name, double costPerKm, double speed)
+            : base(name, TransportType.Water, costPerKm, speed)
+        { }
+        public WaterTransport(string name, TransportInfo info)
+            : base(name, info)
+        {
+            if (info.Type != TransportType.Water)
+            {
+                throw new ArgumentException("Types Don't Match");
+            }
+        }
+    }
+
 
     internal struct TransportInfo
     {
