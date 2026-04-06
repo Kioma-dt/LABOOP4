@@ -1,6 +1,8 @@
-﻿namespace LABOOP4.Entities
+﻿using System.Text.Json.Serialization;
+
+namespace LABOOP4.Entities
 {
-    internal class Cargo
+    public class Cargo
     {
         string _name;
         double _mass;
@@ -8,11 +10,11 @@
         public string Name 
         { 
             get => _name;
-            private set => _name = value;
+            set => _name = value;
         }
         public double Mass {
             get => _mass;
-            private set
+            set
             {
                 if (value <= 0)
                 {
@@ -24,7 +26,7 @@
         public double CostPerKg 
         {
             get => _costPerKg;
-            private set
+            set
             {
                 if (value <= 0)
                 {
@@ -34,8 +36,7 @@
                 _costPerKg = value;
             }
         }
-
-        public Cargo(string name, double mass, double costPerKg)
+        public Cargo(string name,  double mass, double costPerKg)
         {
             Name = name;
             Mass = mass;
@@ -52,14 +53,15 @@
             return CostPerKg * Mass;
         }
     }
-    internal struct CargoInfo
+
+    public struct CargoInfo
     {
         double _mass;
         double _costPerKg;
         public double Mass
         {
             get => _mass;
-            private set
+            set
             {
                 if (value <= 0)
                 {
@@ -71,7 +73,7 @@
         public double CostPerKg
         {
             get => _costPerKg;
-            private set
+            set
             {
                 if (value <= 0)
                 {
@@ -82,6 +84,8 @@
             }
         }
 
+        public CargoInfo() { }
+
         public CargoInfo(double mass, int costPerKg)
         {
             Mass = mass;
@@ -89,14 +93,14 @@
         }
     }
 
-    internal struct CargoBatch
+    public struct CargoBatch
     {
         int _amount;
         public Cargo Cargo { get;}
         public int Amount 
         { 
             get => _amount;
-            private set
+            set
             {
                 if (value == 0)
                 {

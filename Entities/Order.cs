@@ -2,7 +2,7 @@
 
 namespace LABOOP4.Entities
 {
-    internal class Order
+    public class Order
     {
         readonly List<CargoBatch> _cargoBatches;
         readonly Transport _transport;

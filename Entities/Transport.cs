@@ -1,16 +1,63 @@
-﻿namespace LABOOP4.Entities
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
+
+namespace LABOOP4.Entities
 {
-    enum TransportType { Air, Land, Water};
-    internal abstract class Transport
+    public enum TransportType { Air, Land, Water};
+
+    public static class TransportTypeConverter
+    {
+        public static TransportType ParseTransportType(string value)
+        {
+            return value.ToLower() switch
+            {
+                "земля" => TransportType.Land,
+                "вода" => TransportType.Water,
+                "воздух" => TransportType.Air,
+                _ => throw new ArgumentException($"Unknown transport type: {value}")
+            };
+        }
+    };
+
+    public class JsonTransportTypeConverter : JsonConverter<TransportType>
+    {
+        public override TransportType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            var value = reader.GetString();
+
+            return value.ToLower() switch
+            {
+                "земля" => TransportType.Land,
+                "вода" => TransportType.Water,
+                "воздух" => TransportType.Air,
+                _ => throw new JsonException($"Unknown type: {value}")
+            };
+        }
+
+        public override void Write(Utf8JsonWriter writer, TransportType value, JsonSerializerOptions options)
+        {
+            var str = value switch
+            {
+                TransportType.Land => "земля",
+                TransportType.Water => "вода",
+                TransportType.Air => "воздух",
+                _ => throw new JsonException()
+            };
+
+            writer.WriteStringValue(str);
+        }
+    }
+
+    public abstract class Transport
     {
         double _costPerKm;
         double _speed;
-        public string Name { get; }
-        public TransportType Type { get; }
+        public string Name { get; set; }
+        public TransportType Type { get; set; }
         public double CostPerKm 
         { 
             get => _costPerKm;
-            private set
+            set
             {
                 if (value <= 0)
                 {
@@ -22,7 +69,7 @@
         public double Speed 
         { 
             get => _speed;
-            private set 
+            set 
             {
                 if (value <= 0)
                 {
@@ -31,7 +78,6 @@
                 _speed = value;
             }
         }
-
         public Transport(string name, TransportType type, double costPerKm, double speed)
         {
             Name = name;
@@ -46,7 +92,7 @@
         }
     }
 
-    internal class AirTransport : Transport
+    public class AirTransport : Transport
     {
         public AirTransport(string name, double costPerKm, double speed) 
             :base(name, TransportType.Air, costPerKm, speed)
@@ -61,7 +107,7 @@
         }
     }
 
-    internal class LandTransport : Transport
+    public class LandTransport : Transport
     {
         public LandTransport(string name, double costPerKm, double speed)
             : base(name, TransportType.Land, costPerKm, speed)
@@ -75,7 +121,7 @@
             }
         }
     }
-    internal class WaterTransport : Transport
+    public class WaterTransport : Transport
     {
         public WaterTransport(string name, double costPerKm, double speed)
             : base(name, TransportType.Water, costPerKm, speed)
@@ -91,15 +137,17 @@
     }
 
 
-    internal struct TransportInfo
+    public struct TransportInfo
     {
         double _costPerKm;
         double _speed;
-        public TransportType Type { get; }
+
+        [JsonConverter(typeof(JsonTransportTypeConverter))]
+        public TransportType Type { get; set; }
         public double CostPerKm
         {
             get => _costPerKm;
-            private set
+            set
             {
                 if (value <= 0)
                 {
@@ -111,7 +159,7 @@
         public double Speed
         {
             get => _speed;
-            private set
+            set
             {
                 if (value <= 0)
                 {
@@ -120,6 +168,8 @@
                 _speed = value;
             }
         }
+
+        public TransportInfo() { }
 
         public TransportInfo(TransportType type, double costPerKm, double speed)
         { 

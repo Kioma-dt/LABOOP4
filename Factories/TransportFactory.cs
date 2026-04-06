@@ -1,17 +1,39 @@
 ﻿using LABOOP4.Entities;
 namespace LABOOP4.Factories
 {
-    internal interface ITransportFactoryProvider
+    public interface ITransportFactoryProvider
     {
         public ITransportFactory GetFactory(TransportType type);
     }
-    internal interface ITransportFactory
+
+    public class TransportFactoryProvider : ITransportFactoryProvider
+    {
+        readonly Dictionary<TransportType, ITransportFactory> _catalog;
+
+        public TransportFactoryProvider(Dictionary<TransportType, ITransportFactory> catalog)
+        {
+            _catalog = catalog;
+        }
+
+        public ITransportFactory GetFactory(TransportType type)
+        {
+            if (!_catalog.ContainsKey(type))
+            {
+                throw new ArgumentException($"No Type: {type} Implementation");
+            }
+
+            return _catalog[type];
+        }
+    }
+
+
+    public interface ITransportFactory
     {
         public Transport CreateTransportByName(string name);
         public List<Transport> CreateAllTransports();
     }
 
-    internal class AirTransportFactory : ITransportFactory
+    public class AirTransportFactory : ITransportFactory
     {
         Dictionary<string, TransportInfo> _catalog;
         public AirTransportFactory(Dictionary<string, TransportInfo> catalog)
@@ -48,7 +70,7 @@ namespace LABOOP4.Factories
             return transports;
         }
     }
-    internal class LandTransportFactory : ITransportFactory
+    public class LandTransportFactory : ITransportFactory
     {
         Dictionary<string, TransportInfo> _catalog;
         public LandTransportFactory(Dictionary<string, TransportInfo> catalog)
@@ -85,7 +107,7 @@ namespace LABOOP4.Factories
             return transports;
         }
     }
-    internal class WaterTransportFactory : ITransportFactory
+    public class WaterTransportFactory : ITransportFactory
     {
         Dictionary<string, TransportInfo> _catalog;
         public WaterTransportFactory(Dictionary<string, TransportInfo> catalog)
@@ -122,48 +144,29 @@ namespace LABOOP4.Factories
         }
     }
 
-    internal class TransportFactoryProvider : ITransportFactoryProvider 
-    {
-        readonly Dictionary<TransportType, ITransportFactory> _catalog;
 
-        public TransportFactoryProvider(Dictionary<TransportType, ITransportFactory> catalog)
-        {
-            _catalog = catalog;
-        }
-
-        public ITransportFactory GetFactory(TransportType type)
-        {
-            if (!_catalog.ContainsKey(type))
-            {
-                throw new ArgumentException($"No Type: {type} Implementation");
-            }
-
-            return _catalog[type];
-        }
-    }
-
-    //internal class TruckFactory : ITransportFactory
+    //public class TruckFactory : ITransportFactory
     //{
     //    public Transport CreateTransport()
     //    {
     //        return new Truck();
     //    }
     //}
-    //internal class TrainFactory : ITransportFactory
+    //public class TrainFactory : ITransportFactory
     //{
     //    public Transport CreateTransport()
     //    {
     //        return new Train();
     //    }
     //}
-    //internal class TankerFactory : ITransportFactory
+    //public class TankerFactory : ITransportFactory
     //{
     //    public Transport CreateTransport()
     //    {
     //        return new Tanker();
     //    }
     //}
-    //internal class AirplaneFactory : ITransportFactory
+    //public class AirplaneFactory : ITransportFactory
     //{
     //    public Transport CreateTransport()
     //    {
@@ -172,7 +175,7 @@ namespace LABOOP4.Factories
 
     //}
 
-    //internal class HelicopterFactory : ITransportFactory
+    //public class HelicopterFactory : ITransportFactory
     //{
     //    public Transport CreateTransport()
     //    {
@@ -183,35 +186,35 @@ namespace LABOOP4.Factories
 
 
 
-    //internal class Truck : Transport
+    //public class Truck : Transport
     //{
     //    public Truck()
     //        : base("Грузовик", TransportType.Land, 15.0, 80)
     //    {
     //    }
     //}
-    //internal class Train : Transport
+    //public class Train : Transport
     //{
     //    public Train()
     //        : base("Поезд", TransportType.Land, 5.0, 60)
     //    {
     //    }
     //}
-    //internal class Tanker : Transport
+    //public class Tanker : Transport
     //{
     //    public Tanker()
     //        : base("Танкер", TransportType.Water, 2.0, 35)
     //    {
     //    }
     //}
-    //internal class Airplane : Transport
+    //public class Airplane : Transport
     //{
     //    public Airplane()
     //        : base("Самолет", TransportType.Air, 150.0, 850)
     //    {
     //    }
     //}
-    //internal class Helicopter : Transport
+    //public class Helicopter : Transport
     //{
     //    public Helicopter()
     //        : base("Вертолет", TransportType.Air, 200.0, 250)

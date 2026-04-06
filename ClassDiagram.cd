@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="LABOOP4.Entities.Cargo">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAIAAAAAAAAAAAAAAUAAAAAAAAAAAAgAACAAQA=</HashCode>
+      <FileName>Entities\Cargo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LABOOP4.Entities.Order">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAABAAAAAAAgAAAgAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Entities\Order.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_transport" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="_cargoBatches" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="LABOOP4.Entities.Transport">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAQBAAAAAAAABQAgAAAAAAA=</HashCode>
+      <FileName>Entities\Transport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LABOOP4.Entities.AirTransport">
+    <Position X="12.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Transport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LABOOP4.Entities.LandTransport">
+    <Position X="7.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Transport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LABOOP4.Entities.WaterTransport">
+    <Position X="9.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Transport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LABOOP4.Factories.CargoFactory">
+    <Position X="3.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Factories\CargoFactory.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LABOOP4.Factories.AirTransportFactory" BaseTypeListCollapsed="true">
+    <Position X="15.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAIAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Factories\TransportFactory.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LABOOP4.Factories.LandTransportFactory" BaseTypeListCollapsed="true">
+    <Position X="16.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAIAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Factories\TransportFactory.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="LABOOP4.Factories.WaterTransportFactory" BaseTypeListCollapsed="true">
+    <Position X="17.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAIAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Factories\TransportFactory.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="LABOOP4.Use_Cases.LogisticSystem">
+    <Position X="5.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAEAEAAAAAAAAAAABAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Use Cases\LogisticSystem.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_cargoFactory" />
+      <Field Name="_transportFactoryProvider" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="_orders" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="LABOOP4.Factories.TransportFactoryProvider" BaseTypeListCollapsed="true">
+    <Position X="14" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Factories\TransportFactory.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Struct Name="LABOOP4.Entities.CargoInfo">
+    <Position X="2.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAgAACAAQA=</HashCode>
+      <FileName>Entities\Cargo.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="LABOOP4.Entities.CargoBatch">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAACAAAAAAAABAABAAAAAAAA=</HashCode>
+      <FileName>Entities\Cargo.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Cargo" />
+    </ShowAsAssociation>
+  </Struct>
+  <Struct Name="LABOOP4.Entities.TransportInfo">
+    <Position X="14.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAABAAAAAAAABQAgAAAAAAA=</HashCode>
+      <FileName>Entities\Transport.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="LABOOP4.Factories.ICargoFactory">
+    <Position X="8" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Factories\CargoFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="LABOOP4.Factories.ITransportFactoryProvider">
+    <Position X="8.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Factories\TransportFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="LABOOP4.Factories.ITransportFactory">
+    <Position X="14" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Factories\TransportFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="LABOOP4.Entities.TransportType">
+    <Position X="12.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAgAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Entities\Transport.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
