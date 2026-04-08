@@ -1,14 +1,8 @@
 ﻿using LABOOP4.Entities;
 using System.Text.Json;
 
-namespace LABOOP4.FileService
+namespace LABOOP4.FileService.Catalog
 {
-    public interface ICatalogService
-    {
-        Dictionary<string, CargoInfo> GetCargoCatalog(string fileName);
-        Dictionary<string, TransportInfo> GetTransportCatalog(string fileName);
-    }
-
     public class JsonCatalogDTO
     {
         public Dictionary<string, CargoInfo> Cargo { get; set; }
@@ -33,7 +27,7 @@ namespace LABOOP4.FileService
             {
                 var data = Load(fileName);
 
-                if (data is null) 
+                if (data is null)
                 {
                     throw new JsonException();
                 }

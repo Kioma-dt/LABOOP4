@@ -47,7 +47,7 @@ namespace LABOOP4.Factories
             {
                 throw new Exception($"No Such Transport: {name} in Catalog!");
             }
-            if (_catalog[name].Type != TransportType.Air) 
+            if (_catalog[name].Type.ToTransportType() != TransportType.Air) 
             {
                 throw new Exception($"No Transport {name} in not Air!");
             }
@@ -61,7 +61,7 @@ namespace LABOOP4.Factories
 
             foreach (var (name, info) in _catalog) 
             {
-                if (info.Type == TransportType.Air)
+                if (info.Type.ToTransportType() == TransportType.Air)
                 {
                     transports.Add(new  AirTransport(name, info));
                 }
@@ -84,7 +84,7 @@ namespace LABOOP4.Factories
             {
                 throw new Exception($"No Such Transport: {name} in Catalog!");
             }
-            if (_catalog[name].Type != TransportType.Land)
+            if (_catalog[name].Type.ToTransportType() != TransportType.Land)
             {
                 throw new Exception($"No Transport {name} in not Air!");
             }
@@ -98,7 +98,7 @@ namespace LABOOP4.Factories
 
             foreach (var (name, info) in _catalog)
             {
-                if (info.Type == TransportType.Land)
+                if (info.Type.ToTransportType() == TransportType.Land)
                 {
                     transports.Add(new LandTransport(name, info));
                 }
@@ -121,7 +121,7 @@ namespace LABOOP4.Factories
             {
                 throw new Exception($"No Such Transport: {name} in Catalog!");
             }
-            if (_catalog[name].Type != TransportType.Water)
+            if (_catalog[name].Type.ToTransportType() != TransportType.Water)
             {
                 throw new Exception($"No Transport {name} in not Air!");
             }
@@ -134,7 +134,7 @@ namespace LABOOP4.Factories
 
             foreach (var (name, info) in _catalog)
             {
-                if (info.Type == TransportType.Water)
+                if (info.Type.ToTransportType() == TransportType.Water)
                 {
                     transports.Add(new WaterTransport(name, info));
                 }

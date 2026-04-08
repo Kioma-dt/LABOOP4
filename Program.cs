@@ -1,7 +1,7 @@
 ﻿using LABOOP4.Entities;
 using LABOOP4.Factories;
 using LABOOP4.Use_Cases;
-using LABOOP4.FileService;
+using LABOOP4.FileService.Catalog;
 
 namespace LABOOP4
 {
@@ -11,10 +11,10 @@ namespace LABOOP4
         {
             try
             {
-                ICatalogService catalogService = new JsonCatalogService();
+                ICatalogService catalogService = new CsvCatalogService();
 
-                var cargoCatalog = catalogService.GetCargoCatalog("Files//catalog.json");
-                var transportCatalog = catalogService.GetTransportCatalog("Files//catalog.json");
+                var cargoCatalog = catalogService.GetCargoCatalog("Files//catalog.csv");
+                var transportCatalog = catalogService.GetTransportCatalog("Files//catalog.csv");
 
                 foreach (var (cargoName, cargoInfo) in cargoCatalog)
                 { 
@@ -24,6 +24,19 @@ namespace LABOOP4
                 {
                     Console.WriteLine($"{transportName} {transportInfo.Type} {transportInfo.CostPerKm} {transportInfo.Speed}");
                 }
+
+                var transportFactories = new Dictionary<TransportType, ITransportFactory>()
+                {
+                    { TransportType.Air, new AirTransportFactory(transportCatalog) },
+                    { TransportType.Land, new LandTransportFactory(transportCatalog) },
+                    { TransportType.Water, new WaterTransportFactory(transportCatalog) }
+                };
+
+                ITransportFactory transportFactory = new TransportFactoryProvider(transportFactories).GetFactory(TransportType.Air);
+
+                var sam = transportFactory.CreateTransportByName("Airplane");
+
+                Console.WriteLine($"{sam.Name} {sam.Type} {sam.CostPerKm} {sam.Speed}");
 
                 //var cargoCatalog = new Dictionary<string, CargoInfo>()
                 //{

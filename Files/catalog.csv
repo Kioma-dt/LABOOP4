@@ -1,0 +1,10 @@
+Type,Name,Mass,CostPerKg,TransportType,CostPerKm,Speed
+Cargo,Electronic,1.5,50,,,
+Cargo,Cloth,0.8,20,,,
+Cargo,Equipment,120.0,15,,,
+Cargo,Products,10.0,100,,,
+Transport,Truck,,,Land,15.0,80
+Transport,Train,,,Land,5.0,60
+Transport,Tanker,,,Water,2.0,35
+Transport,Airplane,,,Air,150.0,850
+Transport,Helicopter,,,Air,200.0,250

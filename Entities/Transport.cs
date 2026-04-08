@@ -7,46 +7,20 @@ namespace LABOOP4.Entities
 
     public static class TransportTypeConverter
     {
-        public static TransportType ParseTransportType(string value)
+        public static TransportType ToTransportType(this string value)
         {
             return value.ToLower() switch
             {
-                "земля" => TransportType.Land,
+                "земля"=> TransportType.Land,
+                "land" => TransportType.Land,
                 "вода" => TransportType.Water,
+                "water" => TransportType.Water,
+                "air" => TransportType.Air,
                 "воздух" => TransportType.Air,
                 _ => throw new ArgumentException($"Unknown transport type: {value}")
             };
         }
     };
-
-    public class JsonTransportTypeConverter : JsonConverter<TransportType>
-    {
-        public override TransportType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
-            var value = reader.GetString();
-
-            return value.ToLower() switch
-            {
-                "земля" => TransportType.Land,
-                "вода" => TransportType.Water,
-                "воздух" => TransportType.Air,
-                _ => throw new JsonException($"Unknown type: {value}")
-            };
-        }
-
-        public override void Write(Utf8JsonWriter writer, TransportType value, JsonSerializerOptions options)
-        {
-            var str = value switch
-            {
-                TransportType.Land => "земля",
-                TransportType.Water => "вода",
-                TransportType.Air => "воздух",
-                _ => throw new JsonException()
-            };
-
-            writer.WriteStringValue(str);
-        }
-    }
 
     public abstract class Transport
     {
@@ -86,7 +60,7 @@ namespace LABOOP4.Entities
             Speed = speed;
         }
         public Transport(string name, TransportInfo info)
-            : this(name, info.Type, info.CostPerKm, info.Speed)
+            : this(name, info.Type.ToTransportType(), info.CostPerKm, info.Speed)
         {
 
         }
@@ -100,7 +74,7 @@ namespace LABOOP4.Entities
         public AirTransport(string name, TransportInfo info)
             :base(name, info)
         {
-            if (info.Type != TransportType.Air)
+            if (info.Type.ToTransportType() != TransportType.Air)
             {
                 throw new ArgumentException("Types Don't Match");
             }
@@ -115,7 +89,7 @@ namespace LABOOP4.Entities
         public LandTransport(string name, TransportInfo info)
             : base(name, info)
         {
-            if (info.Type != TransportType.Land)
+            if (info.Type.ToTransportType() != TransportType.Land)
             {
                 throw new ArgumentException("Types Don't Match");
             }
@@ -129,7 +103,7 @@ namespace LABOOP4.Entities
         public WaterTransport(string name, TransportInfo info)
             : base(name, info)
         {
-            if (info.Type != TransportType.Water)
+            if (info.Type.ToTransportType() != TransportType.Water)
             {
                 throw new ArgumentException("Types Don't Match");
             }
@@ -142,8 +116,7 @@ namespace LABOOP4.Entities
         double _costPerKm;
         double _speed;
 
-        [JsonConverter(typeof(JsonTransportTypeConverter))]
-        public TransportType Type { get; set; }
+        public string Type { get; set; }
         public double CostPerKm
         {
             get => _costPerKm;
@@ -171,7 +144,7 @@ namespace LABOOP4.Entities
 
         public TransportInfo() { }
 
-        public TransportInfo(TransportType type, double costPerKm, double speed)
+        public TransportInfo(string type, double costPerKm, double speed)
         { 
             Type = type;
             CostPerKm = costPerKm;
