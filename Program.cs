@@ -60,13 +60,13 @@ namespace LABOOP4
                     //TransportType.Air
                 );
 
-                IOrderSort sort = new DeliveryCostSort();
+                //IOrderSort sort = new DeliveryCostSort();
                 OrdersFilter filter = new OrdersFilter();
-                //filter.AddFilter(new TransportTypeFilter(TransportType.Air));
+                filter.AddFilter(new TransportTypeFilter(TransportType.Air));
 
                 var orders = logisticSystem.Orders;
                 orders = filter.ApplyFilters(orders);
-                orders = sort.Sort(orders);
+                //orders = sort.Sort(orders);
                 var saveDTOs = new List<SaveDTO>();
                 foreach (var order in orders)
                 {
@@ -76,8 +76,8 @@ namespace LABOOP4
                     saveDTOs.Add(new SaveDTO(order));
                 }
                 SaveService saveService = new CsvSaveService();
-                saveService = new EncryptionDecorator(saveService, key, iv);
-                saveService = new ZipDecorator(saveService, "Files//archive.zip");
+                //saveService = new EncryptionDecorator(saveService, key, iv);
+                //saveService = new ZipDecorator(saveService, "Files//archive.zip");
                 saveService.Save(saveDTOs, "Files//output.csv");
             }
             catch (Exception ex)

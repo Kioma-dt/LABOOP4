@@ -14,9 +14,13 @@ namespace LABOOP4.FileService.Save
         public SaveDTO() { }
         public SaveDTO(Order order)
         {
+            TransportType = order.TrasnportType.ToString();
+            TransportName = order.TrasnportName;
             DeliveryCost = order.Cost.ToString(CultureInfo.InvariantCulture);
             DeliveryTime = order.DeliveryTime.ToString(CultureInfo.InvariantCulture);
         }
+        public string TransportType { get; set; }
+        public string TransportName { get; set; }
         public string DeliveryCost {  get; set; }
         public string DeliveryTime { get; set; }
     }
@@ -52,11 +56,11 @@ namespace LABOOP4.FileService.Save
 
                 using (var writer = new StreamWriter(fileName))
                 {
-                    writer.WriteLine("DeliveryCost,DeliveryTime");
+                    writer.WriteLine("TrasnsportName,TransportType,DeliveryCost,DeliveryTime");
 
                     foreach (var order in orders)
                     {
-                        writer.WriteLine($"{order.DeliveryCost},{order.DeliveryTime}");
+                        writer.WriteLine($"{order.TransportName},{order.TransportType},{order.DeliveryCost},{order.DeliveryTime}");
                     }
                 }
             }
