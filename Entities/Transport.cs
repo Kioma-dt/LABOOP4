@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace LABOOP4.Entities
 {
-    public enum TransportType { Air, Land, Water};
+    public enum TransportType { Air, Land, Water, None};
 
     public static class TransportTypeConverter
     {

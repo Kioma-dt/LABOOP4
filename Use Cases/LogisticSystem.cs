@@ -16,16 +16,28 @@ namespace LABOOP4.Use_Cases
         }
 
         public void RegisterOrder(IEnumerable<(string cargoName, int amount)> cargoBatches, 
-            TransportType transportType,
             int distance,
+            TransportType transportType = TransportType.None,
             string? transportName = null)
         {
+            _orders.Clear();
             var batches = new List<(Cargo, int)>();
             foreach (var (cargoName, amount) in cargoBatches)
             {
                 batches.Add((_cargoFactory.CreateCargo(cargoName),amount));
             }
 
+            if (transportType == TransportType.None)
+            {
+                foreach(var factory in _transportFactoryProvider.GetAllFactories())
+                {
+                    foreach (var transport in factory.CreateAllTransports())
+                    {
+                        var order = new Order(batches, transport, distance);
+                        _orders.Add(order);
+                    }
+                }
+            }
             var transportFactory = _transportFactoryProvider.GetFactory(transportType);
 
             if (transportName is not null)

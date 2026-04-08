@@ -20,6 +20,10 @@ namespace LABOOP4.Entities
             _distance = distance;
         }
 
+        public int Distance => _distance;
+        public double Cost => GetCost();
+        public double DeliveryTime => GetDeliveryTime();
+
         public double GetCost()
         {
             double batchesCost = _cargoBatches.Sum(x => x.GetCost());

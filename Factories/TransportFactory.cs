@@ -4,6 +4,7 @@ namespace LABOOP4.Factories
     public interface ITransportFactoryProvider
     {
         public ITransportFactory GetFactory(TransportType type);
+        public IEnumerable<ITransportFactory> GetAllFactories();
     }
 
     public class TransportFactoryProvider : ITransportFactoryProvider
@@ -13,6 +14,11 @@ namespace LABOOP4.Factories
         public TransportFactoryProvider(Dictionary<TransportType, ITransportFactory> catalog)
         {
             _catalog = catalog;
+        }
+
+        public IEnumerable<ITransportFactory> GetAllFactories()
+        {
+            return _catalog.Values.ToList();
         }
 
         public ITransportFactory GetFactory(TransportType type)
