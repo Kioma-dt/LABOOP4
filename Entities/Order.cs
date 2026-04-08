@@ -20,6 +20,8 @@ namespace LABOOP4.Entities
             _distance = distance;
         }
 
+        public string TrasnportName => _transport.Name;
+        public TransportType TrasnportType => _transport.Type;
         public int Distance => _distance;
         public double Cost => GetCost();
         public double DeliveryTime => GetDeliveryTime();

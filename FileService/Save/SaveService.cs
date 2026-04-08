@@ -1,4 +1,5 @@
 ﻿using LABOOP4.Entities;
+using System.Globalization;
 using System.Text.Json;
 
 namespace LABOOP4.FileService.Save
@@ -13,8 +14,8 @@ namespace LABOOP4.FileService.Save
         public SaveDTO() { }
         public SaveDTO(Order order)
         {
-            DeliveryCost = order.Cost.ToString();
-            DeliveryTime = order.DeliveryTime.ToString();
+            DeliveryCost = order.Cost.ToString(CultureInfo.InvariantCulture);
+            DeliveryTime = order.DeliveryTime.ToString(CultureInfo.InvariantCulture);
         }
         public string DeliveryCost {  get; set; }
         public string DeliveryTime { get; set; }

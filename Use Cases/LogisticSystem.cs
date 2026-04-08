@@ -37,6 +37,8 @@ namespace LABOOP4.Use_Cases
                         _orders.Add(order);
                     }
                 }
+
+                return;
             }
             var transportFactory = _transportFactoryProvider.GetFactory(transportType);
 
