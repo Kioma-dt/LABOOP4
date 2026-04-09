@@ -91,6 +91,11 @@ namespace LABOOP4.Entities
             Mass = mass;
             CostPerKg = costPerKg;
         }
+
+        public override string ToString()
+        {
+            return $"Mass: {Mass}, CostPerKg: {CostPerKg}";
+        }
     }
 
     public struct CargoBatch

@@ -2,28 +2,28 @@
 <XmlCatalogDTO>
   <Cargo>
     <item>
-      <Name>Электроника</Name>
+      <Name>Electronic</Name>
       <CargoInfo>
         <Mass>1.5</Mass>
         <CostPerKg>50</CostPerKg>
       </CargoInfo>
     </item>
     <item>
-      <Name>Одежда</Name>
+      <Name>Cloth</Name>
       <CargoInfo>
         <Mass>0.8</Mass>
         <CostPerKg>20</CostPerKg>
       </CargoInfo>
     </item>
     <item>
-      <Name>Оборудование</Name>
+      <Name>Equipment</Name>
       <CargoInfo>
         <Mass>120.0</Mass>
         <CostPerKg>15</CostPerKg>
       </CargoInfo>
     </item>
     <item>
-      <Name>Скоропортящиеся продукты</Name>
+      <Name>Product</Name>
       <CargoInfo>
         <Mass>10.0</Mass>
         <CostPerKg>100</CostPerKg>
@@ -33,41 +33,41 @@
 
   <Transport>
     <item>
-      <Name>Грузовик</Name>
+      <Name>Truck</Name>
       <TransportInfo>
-        <Type>земля</Type>
+        <Type>Land</Type>
         <CostPerKm>15.0</CostPerKm>
         <Speed>80</Speed>
       </TransportInfo>
     </item>
     <item>
-      <Name>Поезд</Name>
+      <Name>Train</Name>
       <TransportInfo>
-        <Type>земля</Type>
+        <Type>Land</Type>
         <CostPerKm>5.0</CostPerKm>
         <Speed>60</Speed>
       </TransportInfo>
     </item>
     <item>
-      <Name>Танкер</Name>
+      <Name>Tanker</Name>
       <TransportInfo>
-        <Type>вода</Type>
+        <Type>Water</Type>
         <CostPerKm>2.0</CostPerKm>
         <Speed>35</Speed>
       </TransportInfo>
     </item>
     <item>
-      <Name>Самолет</Name>
+      <Name>Airplane</Name>
       <TransportInfo>
-        <Type>воздух</Type>
+        <Type>Air</Type>
         <CostPerKm>150.0</CostPerKm>
         <Speed>850</Speed>
       </TransportInfo>
     </item>
     <item>
-      <Name>Вертолет</Name>
+      <Name>Helicopter</Name>
       <TransportInfo>
-        <Type>воздух</Type>
+        <Type>Air</Type>
         <CostPerKm>200.0</CostPerKm>
         <Speed>250</Speed>
       </TransportInfo>

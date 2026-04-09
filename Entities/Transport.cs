@@ -150,5 +150,10 @@ namespace LABOOP4.Entities
             CostPerKm = costPerKm;
             Speed = speed;
         }
+
+        public override string ToString()
+        {
+            return $"Type: {Type}, Speed: {Speed}, CostPerKm: {CostPerKm}";
+        }
     }
 }
